@@ -71,7 +71,7 @@ export default function HodReview() {
   const loadAll = useCallback(async () => {
     setLoading(true)
     if (supabaseConfigured) {
-      const { data } = await supabase.from('nominations').select('*').order('created_at', { ascending: false })
+      const { data } = await supabase.from('zab_nominations').select('*').order('created_at', { ascending: false })
       setNominations(data || [])
     } else {
       // Demo mode: read from localStorage
@@ -94,7 +94,7 @@ export default function HodReview() {
     setUpdating(id)
     try {
       if (supabaseConfigured) {
-        const { error } = await supabase.from('nominations').update({
+        const { error } = await supabase.from('zab_nominations').update({
           status,
           hod_comments: comment,
           reviewed_at: new Date().toISOString(),

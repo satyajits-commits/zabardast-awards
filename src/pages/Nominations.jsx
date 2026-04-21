@@ -57,7 +57,7 @@ export default function Nominations() {
 
     if (supabaseOk) {
       const { data } = await supabase
-        .from('nominations')
+        .from('zab_nominations')
         .select('id, employee_name, employee_id, department, award_category, status, created_at, quarter')
         .eq('manager_name', user?.display_name || user?.username || '')
         .order('created_at', { ascending: false })
@@ -109,7 +109,7 @@ export default function Nominations() {
       }
 
       if (supabaseConfigured) {
-        const { error } = await supabase.from('nominations').insert([record])
+        const { error } = await supabase.from('zab_nominations').insert([record])
         if (error) throw error
       } else {
         // Demo mode: persist to localStorage so the list refreshes

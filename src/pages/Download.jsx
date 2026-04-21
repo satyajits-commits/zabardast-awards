@@ -39,7 +39,7 @@ export default function Download() {
   async function load() {
     setLoading(true)
     if (supabaseConfigured) {
-      const { data, error } = await supabase.from('nominations').select('*').order('created_at', { ascending: false })
+      const { data, error } = await supabase.from('zab_nominations').select('*').order('created_at', { ascending: false })
       if (!error) setNominations(data || [])
     } else {
       const stored = JSON.parse(localStorage.getItem('za_demo_nominations') || '[]')
@@ -53,7 +53,7 @@ export default function Download() {
     try {
       let rows = []
       if (supabaseConfigured) {
-        let q = supabase.from('nominations').select('*').order('created_at', { ascending: false })
+        let q = supabase.from('zab_nominations').select('*').order('created_at', { ascending: false })
         if (filterStatus) q = q.eq('status', filterStatus)
         const { data, error } = await q
         if (error) throw error
@@ -104,7 +104,7 @@ export default function Download() {
       let rows = []
       if (supabaseConfigured) {
         const { data, error } = await supabase
-          .from('nominations')
+          .from('zab_nominations')
           .select('*')
           .in('status', ['Approved', 'Rejected'])
           .order('created_at', { ascending: false })

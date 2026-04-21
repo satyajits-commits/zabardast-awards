@@ -129,7 +129,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function load() {
-      const { data } = await supabase.from('nominations').select('*').order('created_at', { ascending: false })
+      const { data } = await supabase.from('zab_nominations').select('*').order('created_at', { ascending: false })
       if (data) {
         const total    = data.length
         const pending  = data.filter(r => r.status === 'Pending').length
